@@ -14,4 +14,6 @@ Being a lover of pokemon, I wanted to utilize a pokemon api I found to create an
 
 
 ### Initial Screen Shot
-![Alt text](Screen Shot 2016-06-04 at 2.26.40 PM.png?raw=true "Optional Title")
+
+![Alt text](http://g.recordit.co/qE4RYMVMzi.gif)
+![Alt text](Screen Shot 2016-06-04 at 2.26.40 PM.png?raw=true)
