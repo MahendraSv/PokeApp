@@ -43,7 +43,13 @@ export default class Pokemon extends Component {
     }
     return(
         <View style={styles.container}>
+          <Image 
+            style={styles.sprite} 
+            source={{ uri: this.state.pokemon.sprites.front_default }} 
+          />
           <Text>{this.state.pokemon.name}</Text>
+          <Text>{this.state.pokemon.height + 'ft'}</Text>
+          <Text>{this.state.pokemon.weight + 'lb'}</Text>
         </View>
     );
   }
@@ -55,5 +61,9 @@ const styles = StyleSheet.create({
     marginTop: 50,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  sprite: {
+    height: 100,
+    width: 100,
   }
 });
