@@ -3,106 +3,99 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight,
   Image,
+  Navigator,
+  TouchableHighlight,
+  ListView,
 } from 'react-native';
+
+import Pokemon from './pages/Pokemon';
+
 import rn from 'random-number';
 
-let requestInfoUrl = 'http://pokeapi.co/api/v2/pokemon/';
-let requestPicUrl = 'http://pokeapi.co/api/v2/pokemon-form/';
-
-let id = null;
-
-const rnOptions = {
-  min: 1,
-  max: 721,
-  integer: true
-}
+let requestTypesUrl = 'http://pokeapi.co/api/v2/type/';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      info: '',
-      pic: '',
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1 != r2 
+      }),
+      types: null,
     };
   }
 
   componentDidMount() {
-    this.fetchInfo();
-    this.fetchPicture();
+    this.fetchTypes();
   }
 
-  generateRandomNumber() {
-    return rn(rnOptions);
-  }
-
-  fetchInfo() {
-    id = this.generateRandomNumber();
-    fetch(requestInfoUrl + id)
+  fetchTypes() {
+    fetch(requestTypesUrl)
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
-          info: responseData,
+          dataSource: this.state.dataSource.cloneWithRows(responseData.results),
+          types: responseData.results,
         })
       });
   }
 
-  fetchPicture() {
-    fetch(requestPicUrl + id)
-      .then((response) => response.json())
-      .then((responseData) => {
-        this.setState({
-          pic: responseData.sprites.front_default,
-        });
-      });
+  renderSingleType(type) {
+    return(
+      <TouchableHighlight onPress={this.nextPage.bind(this, type)}>
+        <View style={styles.container}>
+          <View style={styles.listData}>
+            <Text style={styles.type}>{type.name}</Text>
+          </View>
+        </View>
+      </TouchableHighlight>
+    );
   }
 
+  nextPage(type) {
+    this.props.toRoute({
+      name: type.name,
+      component: Pokemon,
+      data: type,
+      sceneConfig: Navigator.SceneConfigs.VerticalUpSwipeJump,
+    });
+  }
+
+
   render() {
-    if (!this.state.info && !this.state.pic) {
-      return (
-        <View style={styles.container}>
-          <Text>Welcome to PokeApp!</Text>
-          <Text>Everytime you open this app a new pokemon will show up</Text>
-          <View>
-            <Text style={styles.loading}>Loading...</Text>
-          </View>
-        </View>
-      )
-    } else {
+    if (!this.state.types) {
       return(
-        <View style={styles.container}>
-          <Text>Welcome to PokeApp!</Text>
-          <Text>Everytime you open this app a new pokemon will show up</Text>
-          <Image
-            style={styles.pic}
-            source={{uri: this.state.pic}}
-          />
-          <View style={styles.info}>
-            <Text>Name: {this.state.info.name}</Text>
-            <Text>Height: {this.state.info.height + 'ft'}</Text>
-            <Text>Weight: {this.state.info.weight + 'lbs'}</Text>
-          </View>
-        </View>
-      )
-    }
+        <View><Text>Retrieving types...</Text></View>  
+      );
+    } 
+
+    return(
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this.renderSingleType.bind(this)}
+      />
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
+    borderStyle: 'solid',
+    borderTopColor: '#445995',
+    borderTopWidth: 1
   },
-  info: {
+  listData: {
+    margin: 10,
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  pic: {
-    height: 200,
-    width: 200,
-    flex: 1,
-  },
-  loading: {
-    flex: 1,
+  type: {
+    fontSize: 20,
   }
 });
