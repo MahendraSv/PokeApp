@@ -18,6 +18,6 @@ Being a lover of pokemon, I wanted to utilize a pokemon api I found to create an
 - Leave a suggestion if you have any!
 
 
-### Functionality v1.1
+### Functionality v1.2
 
-![Alt text](http://g.recordit.co/XSKs7bP9Gr.gif)
+![Alt text](http://g.recordit.co/s9dZVn5pIJ.gif)
