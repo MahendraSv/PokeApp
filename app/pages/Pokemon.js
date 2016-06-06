@@ -9,7 +9,8 @@ import {
   ListView,
 } from 'react-native';
 
-import rn from 'random-number';
+import PokemonSingle from './PokemonSingle';
+
 export default class Pokemon extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +40,7 @@ export default class Pokemon extends Component {
 
   renderSinglePokemon(pokemon) {
     return(
-      <TouchableHighlight>
+      <TouchableHighlight onPress={this.nextPage.bind(this, pokemon)}>
         <View style={styles.container}>
           <View style={styles.listData}>
             <Text style={styles.type}>{pokemon.pokemon.name}</Text>
@@ -49,6 +50,14 @@ export default class Pokemon extends Component {
     );
   }
 
+  nextPage(pokemon) {
+    this.props.toRoute({
+      name: pokemon.pokemon.name,
+      component: PokemonSingle,
+      data: pokemon.pokemon.name,
+      sceneConfig: Navigator.SceneConfigs.VerticalUpSwipeJump,
+    });
+  }
 
   render() {
     if (!this.state.pokemons) {
