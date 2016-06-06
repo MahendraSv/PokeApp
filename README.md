@@ -14,11 +14,10 @@ Being a lover of pokemon, I wanted to utilize a pokemon api I found to create an
 - http://pokeapi.co for all the pokemon data
 
 ### Future Ideas
-- Create a list of types to choose from and generate 5 random pokemon
 - Connect database for favorting
 - Leave a suggestion if you have any!
 
 
-### Initial Functionality
+### Functionality v1.1
 
-![Alt text](http://g.recordit.co/qE4RYMVMzi.gif)
+![Alt text](http://g.recordit.co/XSKs7bP9Gr.gif)
