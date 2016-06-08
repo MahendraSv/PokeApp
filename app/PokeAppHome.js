@@ -10,9 +10,7 @@ import {
 } from 'react-native';
 
 import Pokemon from './pages/Pokemon';
-
 import rn from 'random-number';
-
 let requestTypesUrl = 'http://pokeapi.co/api/v2/type/';
 
 export default class App extends Component {
@@ -86,7 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderStyle: 'solid',
-    borderTopColor: '#445995',
+    borderTopColor: '#FFCB00',
     borderTopWidth: 1
   },
   listData: {
@@ -97,5 +95,6 @@ const styles = StyleSheet.create({
   },
   type: {
     fontSize: 20,
+    fontFamily: 'Apple SD Gothic Neo',
   }
 });

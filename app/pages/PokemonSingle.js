@@ -14,6 +14,10 @@ export default class Pokemon extends Component {
     super(props);
     this.state = {
       pokemon: '',
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1 != r2
+      }),
+      games: '',
     };
   }
 
@@ -26,11 +30,23 @@ export default class Pokemon extends Component {
     fetch(url)
       .then((response) => response.json())
       .then((responseData) => {
-        console.log(responseData);
         this.setState({
           pokemon: responseData,
+          dataSource: this.state.dataSource.cloneWithRows(responseData.game_indices)
         })
       });
+  }
+
+  renderGame(game) {
+    return(
+      <TouchableHighlight>
+        <View style={styles.container}>
+          <View style={styles.listData}>
+            <Text style={styles.text}> {game.version.name}</Text>
+          </View>
+        </View>
+      </TouchableHighlight>
+    ) 
   }
 
   render() {
@@ -42,28 +58,64 @@ export default class Pokemon extends Component {
       );
     }
     return(
-        <View style={styles.container}>
+      <View>
+        <View style={styles.spriteContainer}>
           <Image 
             style={styles.sprite} 
             source={{ uri: this.state.pokemon.sprites.front_default }} 
           />
-          <Text>{this.state.pokemon.name}</Text>
-          <Text>{this.state.pokemon.height + 'ft'}</Text>
-          <Text>{this.state.pokemon.weight + 'lb'}</Text>
+        </View>
+        <View style={styles.infoContainer}>
+          <Text style={styles.text}>{'Height: ' + this.state.pokemon.height + 'ft'}</Text>
+          <Text style={styles.text}>{'Weight: ' + this.state.pokemon.weight + 'lbs'}</Text>
+          <Text style={styles.gamesAppearedTitle}>Games Appeared In</Text>
+        </View>
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={this.renderGame.bind(this)}
+          />
         </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 50,
+  gamesAppearedTitle: {
+    fontFamily: 'Apple SD Gothic Neo',
+    marginTop: 10
+  },
+  infoContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  spriteContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  sprite: {
+    height: 120,
+    width: 120,
+  },
+  text: {
+    fontFamily: 'Apple SD Gothic Neo',
+  },
+  gamesList: {
     alignItems: 'center',
     justifyContent: 'center',
   },
-  sprite: {
-    height: 100,
-    width: 100,
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderStyle: 'solid',
+    borderTopColor: '#FFCB00',
+    borderTopWidth: 1
+  },
+  listData: {
+    margin: 10,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 });

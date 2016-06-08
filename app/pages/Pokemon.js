@@ -62,7 +62,9 @@ export default class Pokemon extends Component {
   render() {
     if (!this.state.pokemons) {
       return(
-        <View><Text>Retrieving pokemon...</Text></View>  
+        <View>
+          <Text>Retrieving pokemon...</Text>
+        </View>  
       );
     } 
     return(
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderStyle: 'solid',
-    borderTopColor: '#445995',
+    borderTopColor: '#FFCB00',
     borderTopWidth: 1
   },
   listData: {
@@ -93,6 +95,9 @@ const styles = StyleSheet.create({
   },
   pokemon: {
     fontSize: 20,
+  },
+  type: {
+    fontFamily: 'Apple SD Gothic Neo',
   }
 });
 
