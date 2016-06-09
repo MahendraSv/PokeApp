@@ -64,7 +64,9 @@ export default class App extends Component {
   render() {
     if (!this.state.types) {
       return(
-        <View><Text>Retrieving types...</Text></View>  
+        <View style={styles.loading}>
+          <Text>Loading...</Text>
+        </View>  
       );
     } 
 
@@ -78,6 +80,10 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
+  loading: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   container: {
     flex: 1,
     flexDirection: 'row',

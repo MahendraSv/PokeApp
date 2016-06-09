@@ -2,10 +2,11 @@
 Being a lover of pokemon, I wanted to utilize a pokemon api I found to create an app of sorts. This project will evolve over time. Stay tuned...
 
 ### Installation
-- `homebrew`
+- Install homebrew
 - Node `brew install nodejs`
 - React Native Command Line Tools `npm install -g react-native-cli`
 - Xcode
+- Clone PokeApp
 - `react-native run-ios` from with the project
 
 ### Stack
@@ -18,6 +19,6 @@ Being a lover of pokemon, I wanted to utilize a pokemon api I found to create an
 - Leave a suggestion if you have any!
 
 
-### Functionality v0.2
+### In Action! 
 
-![Alt text](http://g.recordit.co/s9dZVn5pIJ.gif)
+![Alt text](http://g.recordit.co/V6ZM8WrecV.gif)
