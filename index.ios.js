@@ -17,9 +17,10 @@ const HOME = {
 class PokeApp extends Component {
   render() {
     return (
-        <Router 
+        <Router
           firstRoute={HOME}
           headerStyle={styles.header}
+          titleStyle={styles.headerText}
         />
     );
   }
@@ -28,6 +29,9 @@ class PokeApp extends Component {
 const styles = StyleSheet.create({
   header: {
     backgroundColor: '#FFCB00'
+  },
+  headerText: {
+    color: '#266CC1'
   }
 });
 AppRegistry.registerComponent('PokeApp', () => PokeApp);

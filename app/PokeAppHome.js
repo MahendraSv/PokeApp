@@ -7,28 +7,30 @@ import {
   Navigator,
   TouchableHighlight,
   ListView,
+  TabBarIOS
 } from 'react-native';
 
 import Pokemon from './pages/Pokemon';
 import rn from 'random-number';
 let requestTypesUrl = 'http://pokeapi.co/api/v2/type/';
 
-export default class App extends Component {
+export default class PokeAppHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
       dataSource: new ListView.DataSource({
-        rowHasChanged: (r1, r2) => r1 != r2 
+        rowHasChanged: (r1, r2) => r1 != r2
       }),
       types: null,
+      selectedTab: 'search'
     };
   }
 
   componentDidMount() {
-    this.fetchTypes();
+    this._fetchTypes();
   }
 
-  fetchTypes() {
+  _fetchTypes() {
     fetch(requestTypesUrl)
       .then((response) => response.json())
       .then((responseData) => {
@@ -39,9 +41,9 @@ export default class App extends Component {
       });
   }
 
-  renderSingleType(type) {
+  _renderSingleType(type) {
     return(
-      <TouchableHighlight onPress={this.nextPage.bind(this, type)}>
+      <TouchableHighlight onPress={this._nextPage.bind(this, type)}>
         <View style={styles.container}>
           <View style={styles.listData}>
             <Text style={styles.type}>{type.name}</Text>
@@ -51,7 +53,7 @@ export default class App extends Component {
     );
   }
 
-  nextPage(type) {
+  _nextPage(type) {
     this.props.toRoute({
       name: type.name,
       component: Pokemon,
@@ -60,21 +62,65 @@ export default class App extends Component {
     });
   }
 
+  _renderFirstView() {
+    return (
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this._renderSingleType.bind(this)}
+      />
+    );
+  }
+
+  _renderSecondView() {
+    return(
+      <View style={styles.aboutContainer}>
+        <Text style={styles.aboutMessage}>This is the about page</Text>
+      </View>
+    );
+  }
+
 
   render() {
     if (!this.state.types) {
       return(
         <View style={styles.loading}>
           <Text>Loading...</Text>
-        </View>  
+        </View>
       );
-    } 
+    }
 
     return(
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this.renderSingleType.bind(this)}
-      />
+      <TabBarIOS
+        barTintColor='#FFCB00'
+        tintColor='#266CC1'
+        unselectedTintColor='#266CC1'
+      >
+        <TabBarIOS.Item
+          title="Pokemon Types"
+          systemIcon="search"
+          selected={this.state.selectedTab === 'search'}
+          onPress={() => {
+            this.setState({
+              selectedTab: 'search'
+            })
+          }}
+        >
+          {this._renderFirstView()}
+        </TabBarIOS.Item>
+        <TabBarIOS.Item
+          title="About PokeApp"
+          systemIcon="featured"
+          selected={this.state.selectedTab === 'featured'}
+          onPress={() => {
+            this.setState({
+              selectedTab: 'featured'
+            })
+          }}
+        >
+          {this._renderSecondView()}
+        </TabBarIOS.Item>
+      </TabBarIOS>
+
     );
   }
 }
@@ -102,5 +148,16 @@ const styles = StyleSheet.create({
   type: {
     fontSize: 20,
     fontFamily: 'Apple SD Gothic Neo',
-  }
+  },
+  aboutContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+  },
+  aboutMessage: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
 });

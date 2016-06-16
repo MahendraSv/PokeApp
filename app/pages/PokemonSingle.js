@@ -9,7 +9,7 @@ import {
   ListView,
 } from 'react-native';
 
-export default class Pokemon extends Component {
+export default class PokemonSingle extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,7 +46,7 @@ export default class Pokemon extends Component {
           </View>
         </View>
       </TouchableHighlight>
-    ) 
+    )
   }
 
   render() {
@@ -60,9 +60,9 @@ export default class Pokemon extends Component {
     return(
       <View>
         <View style={styles.spriteContainer}>
-          <Image 
-            style={styles.sprite} 
-            source={{ uri: this.state.pokemon.sprites.front_default }} 
+          <Image
+            style={styles.sprite}
+            source={{ uri: this.state.pokemon.sprites.front_default }}
           />
         </View>
         <View style={styles.infoContainer}>
