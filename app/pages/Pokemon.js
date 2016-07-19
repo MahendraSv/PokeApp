@@ -27,13 +27,14 @@ export default class Pokemon extends Component {
   }
 
   fetchPokemons() {
-    let url = 'https://pokeapi.co/api/v2/type/' + this.props.data.name;
+    let url = `https://pokeapi.co/api/v2/type/${this.props.data.name}?limit=5&offset=5`;
     fetch(url)
       .then((response) => response.json())
       .then((responseData) => {
+        const pokemonArray = responseData.pokemon.slice(0,10);
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.pokemon),
-          pokemons: responseData.pokemon
+          dataSource: this.state.dataSource.cloneWithRows(pokemonArray),
+          pokemons: pokemonArray
         })
       });
   }
@@ -62,11 +63,11 @@ export default class Pokemon extends Component {
   render() {
     if (!this.state.pokemons) {
       return(
-        <View>
+        <View style={styles.loading}>
           <Text>Retrieving pokemon...</Text>
-        </View>  
+        </View>
       );
-    } 
+    }
     return(
       <ListView
         dataSource={this.state.dataSource}
@@ -98,7 +99,9 @@ const styles = StyleSheet.create({
   },
   type: {
     fontFamily: 'Apple SD Gothic Neo',
+  },
+  loading: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
-
-

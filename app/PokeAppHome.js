@@ -12,7 +12,7 @@ import {
 
 import Pokemon from './pages/Pokemon';
 import rn from 'random-number';
-let requestTypesUrl = 'http://pokeapi.co/api/v2/type/';
+let requestTypesUrl = 'http://pokeapi.co/api/v2/type?limit=5&offset=5';
 
 export default class PokeAppHome extends Component {
   constructor(props) {
