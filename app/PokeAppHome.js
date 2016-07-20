@@ -13,6 +13,8 @@ import {
 import Pokemon from './pages/Pokemon';
 import FavoritePokemon from './pages/Favorite_Pokemon';
 import realm from './realm';
+import * as Types from './constants';
+
 
 
 export default class PokeAppHome extends Component {
@@ -22,25 +24,19 @@ export default class PokeAppHome extends Component {
       dataSource: new ListView.DataSource({
         rowHasChanged: (r1, r2) => r1 != r2
       }),
-      types: null,
       selectedTab: 'search'
     };
     this.favorites = realm.objects('Favorite');
   }
 
-  componentDidMount() {
-    this._fetchTypes();
+  componentWillMount() {
+    this._loadTypes();
   }
 
-  _fetchTypes() {
-    fetch('http://pokeapi.co/api/v2/type?limit=5&offset=5')
-      .then((response) => response.json())
-      .then((responseData) => {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.results),
-          types: responseData.results,
-        })
-      });
+  _loadTypes() {
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(Types.types)
+    });
   }
 
   _renderSingleType(type) {
@@ -81,14 +77,6 @@ export default class PokeAppHome extends Component {
 
 
   render() {
-    if (!this.state.types) {
-      return(
-        <View style={styles.loading}>
-          <Text>Loading...</Text>
-        </View>
-      );
-    }
-
     return(
       <TabBarIOS
         barTintColor='#FFCB00'

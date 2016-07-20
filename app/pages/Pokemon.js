@@ -54,8 +54,8 @@ export default class Pokemon extends Component {
   renderSinglePokemon(pokemon) {
     let swipeBtns = [{
       text: 'Favorite',
-      backgroundColor: 'yellow',
-      underlayColor: 'white',
+      backgroundColor: '#ffd700',
+      underlayColor: '#ffe14f',
       onPress: () => {
         console.log('Favorite pressed');
         this._addFavorite(pokemon);
@@ -68,7 +68,10 @@ export default class Pokemon extends Component {
         autoClose='true'
         backgroundColor='transparent'
       >
-        <TouchableHighlight onPress={this.nextPage.bind(this, pokemon)}>
+        <TouchableHighlight
+          onPress={this.nextPage.bind(this, pokemon)}
+          underlayColor='grey'
+        >
           <View style={styles.container}>
             <View style={styles.listData}>
               <Text style={styles.type}>{pokemon.pokemon.name}</Text>

@@ -21,7 +21,7 @@ A React Native App that interacts with the [pokéapi](http://pokeapi.co/). Favor
 * User authentication
   * Favorites by user
 * Leave a suggestion if you have any!
-
+rea
 
 ### In Action!
 
