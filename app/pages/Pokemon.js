@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import Swipeout from '../../node_modules/react-native-swipeout/index.js';
+import realm from '../realm';
 import PokemonSingle from './PokemonSingle';
 
 export default class Pokemon extends Component {
@@ -40,12 +41,26 @@ export default class Pokemon extends Component {
       });
   }
 
+  _addFavorite(pokemon) {
+    console.log('In add favorite function with: ', pokemon);
+    realm.write(() => {
+      realm.create('Favorite', {
+        name: pokemon.pokemon.name,
+        url: pokemon.pokemon.url
+      });
+    });
+  }
+
   renderSinglePokemon(pokemon) {
     let swipeBtns = [{
       text: 'Favorite',
       backgroundColor: 'yellow',
       underlayColor: 'white',
-      onPress: () => { console.log('Favorite pressed', pokemon)}
+      onPress: () => {
+        console.log('Favorite pressed');
+        this._addFavorite(pokemon);
+        console.log('Favorite added');
+      }
     }]
     return(
       <Swipeout

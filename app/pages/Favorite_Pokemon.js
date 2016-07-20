@@ -24,7 +24,7 @@ export default class FavoritePokemon extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      dataSource: this.ds.cloneWithRows(nextProps.favorites);
+      dataSource: this.ds.cloneWithRows(nextProps.favorites)
     })
   }
 
