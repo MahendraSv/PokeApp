@@ -9,6 +9,7 @@ import {
   ListView,
 } from 'react-native';
 
+import Swipeout from '../../node_modules/react-native-swipeout/index.js';
 import PokemonSingle from './PokemonSingle';
 
 export default class Pokemon extends Component {
@@ -40,14 +41,26 @@ export default class Pokemon extends Component {
   }
 
   renderSinglePokemon(pokemon) {
+    let swipeBtns = [{
+      text: 'Favorite',
+      backgroundColor: 'yellow',
+      underlayColor: 'white',
+      onPress: () => { console.log('Favorite pressed', pokemon)}
+    }]
     return(
-      <TouchableHighlight onPress={this.nextPage.bind(this, pokemon)}>
-        <View style={styles.container}>
-          <View style={styles.listData}>
-            <Text style={styles.type}>{pokemon.pokemon.name}</Text>
+      <Swipeout
+        right={swipeBtns}
+        autoClose='true'
+        backgroundColor='transparent'
+      >
+        <TouchableHighlight onPress={this.nextPage.bind(this, pokemon)}>
+          <View style={styles.container}>
+            <View style={styles.listData}>
+              <Text style={styles.type}>{pokemon.pokemon.name}</Text>
+            </View>
           </View>
-        </View>
-      </TouchableHighlight>
+        </TouchableHighlight>
+      </Swipeout>
     );
   }
 
