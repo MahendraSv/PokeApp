@@ -11,8 +11,9 @@ import {
 } from 'react-native';
 
 import Pokemon from './pages/Pokemon';
-import rn from 'random-number';
-let requestTypesUrl = 'http://pokeapi.co/api/v2/type?limit=5&offset=5';
+import FavoritePokemon from './pages/Favorite_Pokemon';
+import realm from './realm';
+
 
 export default class PokeAppHome extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ export default class PokeAppHome extends Component {
       types: null,
       selectedTab: 'search'
     };
+    this.favorites = realm.objects('Favorite');
   }
 
   componentDidMount() {
@@ -31,7 +33,7 @@ export default class PokeAppHome extends Component {
   }
 
   _fetchTypes() {
-    fetch(requestTypesUrl)
+    fetch('http://pokeapi.co/api/v2/type?limit=5&offset=5')
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
@@ -73,9 +75,7 @@ export default class PokeAppHome extends Component {
 
   _renderSecondView() {
     return(
-      <View style={styles.aboutContainer}>
-        <Text style={styles.aboutMessage}>This is the about page</Text>
-      </View>
+      <FavoritePokemon favorites={this.favorites}/>
     );
   }
 
