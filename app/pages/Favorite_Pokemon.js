@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { ListView } from 'realm/react-native';
 import Swipeout from '../../node_modules/react-native-swipeout/index.js';
+import realm from '../realm';
 
 export default class FavoritePokemon extends Component {
 
@@ -39,10 +40,10 @@ export default class FavoritePokemon extends Component {
 
   _renderSingleFavorite(favorite) {
     let swipeBtns = [{
-      text: 'Favorite',
-      backgroundColor: 'yellow',
+      text: 'Remove',
+      backgroundColor: 'red',
       underlayColor: 'white',
-      onPress: () => { this._removeFavorite(this, favorite)}
+      onPress: () => { this._removeFavorite(favorite)}
     }]
     return(
       <View style={styles.listItem}>
@@ -77,11 +78,11 @@ const styles = StyleSheet.create({
   listItem: {
     borderBottomWidth: 1,
     borderBottomColor: 'yellow',
-    padding: 20,
+    padding: 10,
     flexDirection: 'row',
     position: 'relative',
   },
   listItemText: {
-    fontSize: 18,
+    fontSize: 16,
   },
 });
