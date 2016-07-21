@@ -4,6 +4,7 @@ import {
   Text,
   View,
   Image,
+  Navigator,
   TouchableHighlight,
 } from 'react-native';
 import { ListView } from 'realm/react-native';
@@ -52,7 +53,7 @@ export default class FavoritePokemon extends Component {
           autoClose='true'
           backgroundColor='transparent'
         >
-          <TouchableHighlight>
+          <TouchableHighlight underlayColor='#d1d1d1'>
             <Text style={styles.listItemText}>{favorite.name}</Text>
           </TouchableHighlight>
         </Swipeout>
@@ -78,6 +79,7 @@ const styles = StyleSheet.create({
   listItem: {
     borderBottomWidth: 1,
     borderBottomColor: 'yellow',
+    borderStyle: 'solid',
     padding: 10,
     flexDirection: 'row',
     position: 'relative',

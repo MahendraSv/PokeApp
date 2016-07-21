@@ -41,7 +41,10 @@ export default class PokeAppHome extends Component {
 
   _renderSingleType(type) {
     return(
-      <TouchableHighlight onPress={this._nextPage.bind(this, type)}>
+      <TouchableHighlight
+        onPress={this._nextPage.bind(this, type)}
+        underlayColor='#d1d1d1'
+      >
         <View style={styles.container}>
           <View style={styles.listData}>
             <Text style={styles.type}>{type.name}</Text>

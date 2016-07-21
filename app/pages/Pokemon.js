@@ -70,7 +70,7 @@ export default class Pokemon extends Component {
       >
         <TouchableHighlight
           onPress={this.nextPage.bind(this, pokemon)}
-          underlayColor='grey'
+          underlayColor='#d1d1d1'
         >
           <View style={styles.container}>
             <View style={styles.listData}>
