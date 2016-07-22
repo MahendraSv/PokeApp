@@ -13,6 +13,7 @@ import {
   Button
 } from 'native-base';
 import l_ from 'lodash';
+import realm from '../realm';
 
 export default class PokemonSingle extends Component {
   constructor(props) {
@@ -73,6 +74,19 @@ export default class PokemonSingle extends Component {
         <View style={styles.infoContainer}>
           <Text style={styles.text}>{'Height: ' + this.state.pokemon.height + 'ft'}</Text>
           <Text style={styles.text}>{'Weight: ' + this.state.pokemon.weight + 'lbs'}</Text>
+          <Button
+            block
+            warning
+            style={{ backgroundColor: '#FFCB00'}}
+            onPress={() => {
+              realm.write(() => {
+                realm.create('Favorite', {
+                  name: this.state.pokemon.name + '',
+                  url: this.state.pokemon.url + '',
+                });
+              });
+            }}
+          > Favorite</Button>
           <Text style={styles.gamesAppearedTitle}>Games Appeared In</Text>
         </View>
         <ListView

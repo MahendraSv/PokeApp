@@ -10,9 +10,7 @@ import {
     TabBarIOS
 } from 'react-native';
 
-import {
-  Button
-} from 'native-base';
+
 
 import Pokemon from '../containers/Pokemon';
 import FavoritePokemon from '../containers/Favorite_Pokemon';

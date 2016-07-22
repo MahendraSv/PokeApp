@@ -43,7 +43,6 @@ export default class Pokemon extends Component {
   }
 
   _addFavorite(pokemon) {
-    console.log('In add favorite function with: ', pokemon);
     realm.write(() => {
       realm.create('Favorite', {
         name: pokemon.pokemon.name,
