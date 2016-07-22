@@ -5,9 +5,9 @@ import {
   Text,
   View
 } from 'react-native';
-import Router from 'react-native-simple-router';
 
-import PokeAppHome from './app/PokeAppHome';
+import Router from 'react-native-simple-router';
+import PokeAppHome from './app/components/PokeAppHome';
 
 const HOME = {
   name: 'PokeApp',

@@ -10,10 +10,10 @@ import {
   TabBarIOS
 } from 'react-native';
 
-import Pokemon from './pages/Pokemon';
-import FavoritePokemon from './pages/Favorite_Pokemon';
-import realm from './realm';
-import * as Types from './constants';
+import Pokemon from '../containers/Pokemon';
+import FavoritePokemon from '../containers/Favorite_Pokemon';
+import realm from '../realm';
+import * as Types from '../constants';
 
 
 
