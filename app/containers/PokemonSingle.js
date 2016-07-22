@@ -7,7 +7,12 @@ import {
   Navigator,
   TouchableHighlight,
   ListView,
+  ScrollView,
 } from 'react-native';
+import {
+  Button
+} from 'native-base';
+import l_ from 'lodash';
 
 export default class PokemonSingle extends Component {
   constructor(props) {
@@ -42,7 +47,7 @@ export default class PokemonSingle extends Component {
       <TouchableHighlight>
         <View style={styles.container}>
           <View style={styles.listData}>
-            <Text style={styles.text}> {game.version.name}</Text>
+            <Text style={styles.text}> {l_.capitalize(game.version.name)}</Text>
           </View>
         </View>
       </TouchableHighlight>
@@ -70,11 +75,11 @@ export default class PokemonSingle extends Component {
           <Text style={styles.text}>{'Weight: ' + this.state.pokemon.weight + 'lbs'}</Text>
           <Text style={styles.gamesAppearedTitle}>Games Appeared In</Text>
         </View>
-          <ListView
-            dataSource={this.state.dataSource}
-            renderRow={this.renderGame.bind(this)}
-          />
-        </View>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderGame.bind(this)}
+        />
+      </View>
     );
   }
 }

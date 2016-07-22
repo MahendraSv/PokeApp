@@ -10,11 +10,15 @@ import {
     TabBarIOS
 } from 'react-native';
 
+import {
+  Button
+} from 'native-base';
+
 import Pokemon from '../containers/Pokemon';
 import FavoritePokemon from '../containers/Favorite_Pokemon';
 import realm from '../realm';
 import * as Types from '../constants';
-import SwipeableView from 'react-native-scrollable-tab-view'; 
+import l_ from 'lodash';
 
 export default class PokeAppHome extends Component {
     constructor(props) {
@@ -46,7 +50,7 @@ export default class PokeAppHome extends Component {
             >
                 <View style={styles.container}>
                     <View style={styles.listData}>
-                        <Text style={styles.type}>{type.name}</Text>
+                        <Text style={styles.type}>{l_.capitalize(type.name)}</Text>
                     </View>
                 </View>
             </TouchableHighlight>
@@ -55,7 +59,7 @@ export default class PokeAppHome extends Component {
 
     _nextPage(type) {
         this.props.toRoute({
-            name: type.name,
+            name: l_.capitalize(type.name),
             component: Pokemon,
             data: type,
             sceneConfig: Navigator.SceneConfigs.PushFromRight,
@@ -82,12 +86,11 @@ export default class PokeAppHome extends Component {
         return(
             <TabBarIOS
                 barTintColor='#FFCB00'
-                tintColor='#266CC1'
+                tintColor='#FFFFFF'
                 unselectedTintColor='#266CC1'
             >
                 <TabBarIOS.Item
-                    title="Pokemon Types"
-                    systemIcon="search"
+                    title="Types"
                     selected={this.state.selectedTab === 'search'}
                     onPress={() => {
                         this.setState({
@@ -98,8 +101,7 @@ export default class PokeAppHome extends Component {
                     {this._renderFirstView()}
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
-                    title="About PokeApp"
-                    systemIcon="featured"
+                    title="Favorites"
                     selected={this.state.selectedTab === 'featured'}
                     onPress={() => {
                         this.setState({

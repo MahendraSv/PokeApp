@@ -12,6 +12,7 @@ import {
 import Swipeout from '../../node_modules/react-native-swipeout/index.js';
 import realm from '../realm';
 import PokemonSingle from './PokemonSingle';
+import l_ from 'lodash';
 
 export default class Pokemon extends Component {
   constructor(props) {
@@ -74,7 +75,7 @@ export default class Pokemon extends Component {
         >
           <View style={styles.container}>
             <View style={styles.listData}>
-              <Text style={styles.type}>{pokemon.pokemon.name}</Text>
+              <Text style={styles.type}>{l_.capitalize(pokemon.pokemon.name)}</Text>
             </View>
           </View>
         </TouchableHighlight>
@@ -84,7 +85,7 @@ export default class Pokemon extends Component {
 
   nextPage(pokemon) {
     this.props.toRoute({
-      name: pokemon.pokemon.name,
+      name: l_.capitalize(pokemon.pokemon.name),
       component: PokemonSingle,
       data: pokemon.pokemon.name,
       sceneConfig: Navigator.SceneConfigs.PushFromRight,

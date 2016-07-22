@@ -10,6 +10,7 @@ import {
 import { ListView } from 'realm/react-native';
 import Swipeout from '../../node_modules/react-native-swipeout/index.js';
 import realm from '../realm';
+import l_ from 'lodash';
 
 export default class FavoritePokemon extends Component {
 
@@ -54,7 +55,7 @@ export default class FavoritePokemon extends Component {
           backgroundColor='transparent'
         >
           <TouchableHighlight underlayColor='#d1d1d1'>
-            <Text style={styles.listItemText}>{favorite.name}</Text>
+            <Text style={styles.listItemText}>{l_.capitalize(favorite.name)}</Text>
           </TouchableHighlight>
         </Swipeout>
       </View>
