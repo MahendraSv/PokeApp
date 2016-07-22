@@ -87,7 +87,7 @@ export default class Pokemon extends Component {
       name: pokemon.pokemon.name,
       component: PokemonSingle,
       data: pokemon.pokemon.name,
-      sceneConfig: Navigator.SceneConfigs.VerticalUpSwipeJump,
+      sceneConfig: Navigator.SceneConfigs.PushFromRight,
     });
   }
 
